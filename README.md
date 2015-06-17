@@ -22,34 +22,34 @@ or by running the included `WinSCP_regDLL.cmd` file
 ### Connecting to Server  
 > Using normal FTP  
 
-      try
-	  {
-        FTPSession := new WinSCP
+      FTPSession := new WinSCP
+	  try
 	    FTPSession.OpenConnection("ftp://myserver.com","username","password")
 	  } catch e
 	    msgbox % "Oops. . . Something went wrong``n" e.Message
 
 > Using FTP with SSL  
 
-      try
+      FTPSession := new WinSCP
+	  try
 	  {
-        FTPSession := new WinSCP
-	    FTPSession.Hostname		:= "ftp://myserver.com"
+        FTPSession.Hostname		:= "ftp://myserver.com"
         FTPSession.Protocol 		:= WinSCPEnum.FtpProtocol.Ftp
         FTPSession.Secure 		:= WinSCPEnum.FtpSecure.ExplicitSsl
         FTPSession.User			:= "MyUserName"
         FTPSession.Password		:= "P@ssw0rd"
         FTPSession.Fingerprint    := "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx" ;set to false to ignore server certificate
+		FTPSession.OpenConnection()
       } catch e
 	    msgbox % "Oops. . . Something went wrong``n" e.Message
 
 ### Handling files  
 > Upload a single file  
 
-      try
+      FTPSession := new WinSCP
+	  try
 	  {
-        FTPSession := new WinSCP
-	    FTPSession.OpenConnection("ftp://myserver.com","username","password")
+        FTPSession.OpenConnection("ftp://myserver.com","username","password")
 	    
 	    fName := "Windows10_InsiderPreview_x64_EN-US_10074.iso"
 	    fPath := "C:\temp"
@@ -62,10 +62,10 @@ or by running the included `WinSCP_regDLL.cmd` file
 
 > Download file  
 
-      try
+      FTPSession := new WinSCP
+	  try
 	  {
-        FTPSession := new WinSCP
-	    FTPSession.OpenConnection("ftp://myserver.com","username","password")
+        FTPSession.OpenConnection("ftp://myserver.com","username","password")
 	    
 	    fName := "Windows10_InsiderPreview_x64_EN-US_10074.iso"
 	    lPath := "C:\temp"
@@ -77,10 +77,10 @@ or by running the included `WinSCP_regDLL.cmd` file
 		
 > Get File Information  
 
-      try
+      FTPSession := new WinSCP
+	  try
 	  {
-        FTPSession := new WinSCP
-	    FTPSession.OpenConnection("ftp://myserver.com","username","password")
+        FTPSession.OpenConnection("ftp://myserver.com","username","password")
 	    
 	    FileCollection := t.ListDirectory("/")
 	    for file in FileCollection.Files {
