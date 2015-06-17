@@ -7,7 +7,7 @@
 FTPSession := new WinSCP
 try
   FTPSession.OpenConnection("ftp://myserver.com","username","password")
-} catch e
+catch e
   msgbox % "Oops. . . Something went wrong``n" e.Message
 */
 
@@ -25,6 +25,19 @@ try
   FTPSession.Password		:= "P@ssw0rd"
   FTPSession.Fingerprint    := "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx" ;set to false to ignore server certificate
   FTPSession.OpenConnection()
+} catch e
+  msgbox % "Oops. . . Something went wrong``n" e.Message
+*/
+
+/*
+;~ ---------------------------------------------------
+;~ Open Connection saving log
+;~ ---------------------------------------------------
+FTPSession := new WinSCP
+try
+{
+  FTPSession.LogPath       := "c:\temp\FTPSessionLog.log"
+  FTPSession.OpenConnection("ftp://myserver.com","username","password")
 } catch e
   msgbox % "Oops. . . Something went wrong``n" e.Message
 */

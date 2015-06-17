@@ -25,7 +25,7 @@ or by running the included `WinSCP_regDLL.cmd` file
       FTPSession := new WinSCP
 	  try
 	    FTPSession.OpenConnection("ftp://myserver.com","username","password")
-	  } catch e
+	  catch e
 	    msgbox % "Oops. . . Something went wrong``n" e.Message
 
 #### Using FTP with SSL  
