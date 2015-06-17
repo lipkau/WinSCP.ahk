@@ -1,7 +1,7 @@
 # WinSCP.ahk  
 ## <a name="desc"></a>Description
 This Lib allows the use of [WinSCP](http://winscp.net/) in AHK by creating a wrapper class for WinSCPnet.dll (can be donwloaded [here](http://winscp.net/eng/download.php)).  
-> [Documentation](http://winscp.net/eng/docs/library)  
+> [WinSCP .NET & COM Library Documentation](http://winscp.net/eng/docs/library)  
 
 ## Table of Contents  
 * [Description](#desc)
@@ -21,6 +21,7 @@ or by running the included `WinSCP_regDLL.cmd` file
 
 ### Connecting to Server  
 > Using normal FTP  
+
       try
 	  {
         FTPSession := new WinSCP
@@ -29,6 +30,7 @@ or by running the included `WinSCP_regDLL.cmd` file
 	    msgbox % "Oops. . . Something went wrong``n" e.Message
 
 > Using FTP with SSL  
+
       try
 	  {
         FTPSession := new WinSCP
@@ -43,6 +45,7 @@ or by running the included `WinSCP_regDLL.cmd` file
 
 ### Handling files  
 > Upload a single file  
+
       try
 	  {
         FTPSession := new WinSCP
@@ -58,6 +61,7 @@ or by running the included `WinSCP_regDLL.cmd` file
 	    msgbox % "Oops. . . Something went wrong``n" e.Message  
 
 > Download file  
+
       try
 	  {
         FTPSession := new WinSCP
@@ -71,7 +75,8 @@ or by running the included `WinSCP_regDLL.cmd` file
 	  } catch e
 	    msgbox % "Oops. . . Something went wrong``n" e.Message  
 		
-> Get File Information
+> Get File Information  
+
       try
 	  {
         FTPSession := new WinSCP
