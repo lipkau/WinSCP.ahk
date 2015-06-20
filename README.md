@@ -17,9 +17,7 @@ This Lib allows the use of [WinSCP](http://winscp.net/) in AHK by creating a wra
       %WINDIR%\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe WinSCPnet.dll /codebase <path_to>WinSCPnet.dll  
 	  
 or by running the included `WinSCP_regDLL.cmd` file  
-
-> The commands must be run with Admin permissions (elevated)  
-
+_The commands must be run with Admin permissions (elevated)_  
 2. The library can be included using [#Inclulde](http://ahkscript.org/docs/commands/_Include.htm) or by placing the file inside [Library Folders](http://ahkscript.org/docs/Functions.htm#lib).  
 
 ### Connecting to Server  
