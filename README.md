@@ -1,22 +1,25 @@
 # [WinSCP.ahk](http://lipkau.github.io/WinSCP.ahk/)  
-## <a name="desc"></a>Description
+## Description
 This Lib allows the use of [WinSCP](http://winscp.net/) in AHK by creating a wrapper class for WinSCPnet.dll (can be donwloaded [here](http://winscp.net/eng/download.php)).  
 > [WinSCP .NET & COM Library Documentation](http://winscp.net/eng/docs/library)  
 
 ## Table of Contents  
-* [Description](#desc)
-* [Authors/Contributors](#dev-team)
-* [Example](#usage)
-* [Documentation](#doc)
+* [Description](#description)
+* [Example](#example)
+* [Authors/Contributors](#authorscontributors)
+* [Documentation](#documentation)
 
-## <a name="usage"></a>Example  
-
+## Example  
 ### Loading WinSCP.ahk
 1. **The DLL file has to be registered**. This is done with  
+
       %WINDIR%\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe WinSCPnet.dll /codebase <path_to>WinSCPnet.dll
       %WINDIR%\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe WinSCPnet.dll /codebase <path_to>WinSCPnet.dll  
+	  
 or by running the included `WinSCP_regDLL.cmd` file  
+
 > The commands must be run with Admin permissions (elevated)  
+
 2. The library can be included using [#Inclulde](http://ahkscript.org/docs/commands/_Include.htm) or by placing the file inside [Library Folders](http://ahkscript.org/docs/Functions.htm#lib).  
 
 ### Connecting to Server  
@@ -92,8 +95,8 @@ or by running the included `WinSCP_regDLL.cmd` file
 ### More  
 More example will be available in the [wiki](wiki) once it's set up
 
-## <a name="dev-team"></a>Authors/Contributors  
+## Authors/Contributors  
 * "Oliver Lipkau" @ [oliver.lipkau.net](http://oliver.lipkau.net)
 
-## <a name="doc"></a>Documentation
+## Documentation  
 _Git Repo Wiki yet to be written_

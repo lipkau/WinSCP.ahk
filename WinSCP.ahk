@@ -1,8 +1,9 @@
 ;~ -----------------------------------------------------------------------------
 ;~ Name:               WinSCP Class
+;~ http://lipkau.github.io/WinSCP.ahk/
 ;~ -----------------------------------------------------------------------------
-;~ Version:            2.0
-;~ Date:               2015-06-12
+;~ Version:            1.1.0
+;~ Date:               2015-06-20
 ;~ Author:             Lipkau, Oliver <oliver@lipkau.net>
 ;~                     https://github.com/lipkau
 ;~                     http://oliver.lipkau.net/blog
