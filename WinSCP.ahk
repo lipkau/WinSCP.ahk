@@ -42,38 +42,38 @@ class WinSCPEnum
 ;~ -----------------------------------------------------
 /*
 Description
-	Example on how to zse the FileTransferred Event
+	Example on how to use the FileTransferred Event
 */
 ;~ session_FileTransferred(sender, e)
 ;~ {
-	;~ ;MsgBox % e.FileName " => "  e.Destination
+	;~ MsgBox % e.FileName " => "  e.Destination
 ;~ }
 
 /*
 Description
-	Example on how to zse the Failed Event
+	Example on how to use the Failed Event
 */
 ;~ session_Failed(sender, e)
 ;~ {
-	;~ ;MsgBox % e.FileName " => "  e.Destination
+	;~ MsgBox % e.FileName " => "  e.Destination
 ;~ }
 
 /*
 Description
-	Example on how to zse the RemovalEventArgs Event
+	Example on how to use the RemovalEventArgs Event
 	http://winscp.net/eng/docs/library_removaleventargs
 */
 ;~ session_RemovalEventArgs(sender, e)
 ;~ {
-	;~ ;if (e.Error)
-		;~ ;MsgBox % "Failed to remove " e.FileName " => "  e.Error
-	;~ ;else
-		;~ ;MsgBox % "Removed " e.FileName
+	;~ if (e.Error)
+		;~ MsgBox % "Failed to remove " e.FileName " => "  e.Error
+	;~ else
+		;~ MsgBox % "Removed " e.FileName
 ;~ }
 
 /*
 Description
-	Exmaple on how to use the FileTransferProgress Event to display the Progess using AHK GUI
+	Example on how to use the FileTransferProgress Event to display the Progress using AHK GUI
 */
 ;~ session_FileTransferProgress(sender, e)
 ;~ {
@@ -114,7 +114,7 @@ class WinSCP
 
 	/*
 	Description
-		Create a Property for Log Path. Class Session should be transperant in Class FTP.
+		Create a Property for Log Path. Class Session should be transparent in Class FTP.
 	*/
 	LogPath[]
 	{
@@ -130,7 +130,7 @@ class WinSCP
 
 	/*
 	Description
-		Create a Property for the HomePath. Class Session should be transperant in Class FTP.
+		Create a Property for the HomePath. Class Session should be transparent in Class FTP.
 	*/
 	HomePath[]
 	{
@@ -146,7 +146,7 @@ class WinSCP
 
 	/*
 	Description
-		Create a Property for the Opened. Class Session should be transperant in Class FTP.
+		Create a Property for the Opened. Class Session should be transparent in Class FTP.
 	*/
 	Connected[]
 	{
@@ -190,7 +190,7 @@ class WinSCP
 	}
 
 	/*
-	Descitipion
+	Description
 		Open connection to server
 
 	Input
@@ -198,7 +198,7 @@ class WinSCP
 		uName      : [string] User Name
 		pWord      : [string] Password
 	*/
-	OpenConnection(srv="",uName="",pWord="")
+	OpenConnection(srv="", uName="", pWord="")
 	{
 		global WinSCPEnum ; WinSCP Enums
 
@@ -238,7 +238,7 @@ class WinSCP
 	}
 
 	/*
-	Descitipion
+	Description
 		Closes session.
 		New session can be opened using Session.Open using the same instance of Session.
 	*/
@@ -249,7 +249,7 @@ class WinSCP
 	}
 
 	/*
-	Descitipion
+	Description
 		If session was opened, closes it, terminates underlying WinSCP process, deletes XML log file and disposes object.
 	*/
 	Dispose()
@@ -296,7 +296,7 @@ class WinSCP
 		http://winscp.net/eng/docs/library_session_fileexists
 
 	Input:
-		remotePath : [string] Full path to remote file. Note that you cannot use wildcards here.
+		remotePath : [string] Full path to remote file. Note that you cannot use wild-cards here.
 
 	Output:
 		[bool] true if file exists, false otherwise.
@@ -328,12 +328,12 @@ class WinSCP
 		Downloads one or more files from remote directory to local directory.
 		http://winscp.net/eng/docs/library_session_getfiles
 
-		This Method supports Wildcards
+		This Method supports Wild-cards
 		http://winscp.net/eng/docs/library_wildcard
 
 	Input:
-		remotePath : [string]          Full path to remote directory followed by slash and wildcard to
-		                               select files or subdirectories to download. When wildcard is
+		remotePath : [string]          Full path to remote directory followed by slash and wild-card to
+		                               select files or subdirectories to download. When wild-card is
 							           omitted (path ends with slash), all files and subdirectories in
 							           the remote directory are downloaded.
 		localPath  : [string]          Full path to download the file to. When downloading multiple
@@ -363,7 +363,7 @@ class WinSCP
 		Uploads one or more files from local directory to remote directory.
 		http://winscp.net/eng/docs/library_session_putfiles
 
-		This Method supports Wildcards
+		This Method supports Wild-cards
 		http://winscp.net/eng/docs/library_wildcard
 
 	Input:
@@ -419,12 +419,12 @@ class WinSCP
 		Removes one or more remote files.
 		http://winscp.net/eng/docs/library_session_removefiles
 
-		This Method supports Wildcards
+		This Method supports Wild-cards
 		http://winscp.net/eng/docs/library_wildcard
 
 	Input:
 		remotePath : [string] Full path to remote directory followed by slash and
-		                      wildcard to select files or subdirectories to remove.
+		                      wild-card to select files or subdirectories to remove.
 
 	Output:
 		[RemovalOperationResult]
@@ -493,7 +493,7 @@ class WinSCP
 			throw "Invalid TransferOptions"
 
 		if (!this.TransferOptions.TransferMode)
-			this.SetTransferOptions(,,,,,WinSCPEnum.TransferMode.Binary)
+			this.SetTransferOptions(, ,, ,, WinSCPEnum.TransferMode.Binary)
 
 		this.Session.SynchronizeDirectories(SynchronizationMode, localPath, remotePath, removeFiles, mirror, SynchronizationCriteria, this.TransferOptions)
 	}
@@ -510,9 +510,9 @@ class WinSCP
 		FileMask          : [string]                FileMask
 		FilePermissions   : [FilePermissions]       Permissions to applied to a remote file (used for
 		                                            uploads only). Use default null to keep default permissions.
-		PreserveTimestamp : [bool]                  Preserve timestamp (set last write time of destination file
+		PreserveTimestamp : [bool]                  Preserve timestamps (set last write time of destination file
 													to that of source file). Defaults to true.
-                                                    When used with Session.SynchronizeDirectories, timestamp is
+                                                    When used with Session.SynchronizeDirectories, timestamps is
 												    always preserved, disregarding property value, unless criteria
 													parameter is SynchronizationCriteria.None or
 													SynchronizationCriteria.Size.
@@ -521,10 +521,10 @@ class WinSCP
 													instance).
 		SpeedLimit        : [int]                   Limit transfer speed (in KB/s).
 		TransferMode      : [TransferMode]          Transfer mode. Possible values are TransferMode.Binary
-		                                            (default), TransferMode.Ascii and TransferMode.Automatic
+		                                            (default), TransferMode. ASCII and TransferMode.Automatic
 													(based on file extension).
 	*/
-	SetTransferOptions(FileMask="",FilePermissions="",PreserveTimestamp=true,ResumeSupport="",SpeedLimit="",TransferMode=0)
+	SetTransferOptions(FileMask="", FilePermissions="", PreserveTimestamp=true, ResumeSupport="", SpeedLimit="", TransferMode=0)
 	{
 		global WinSCPEnum ; WinSCP Enums
 
@@ -559,7 +559,7 @@ class WinSCP
 
 	/*
 	Description
-		Converts special characters in file path to make it unambiguous file mask/wildcard.
+		Converts special characters in file path to make it unambiguous file mask/wild-card.
 		http://winscp.net/eng/docs/library_session_escapefilemask
 
 	Input
@@ -586,6 +586,6 @@ class WinSCP
 		t := ""
 		for key, value in array
 			t .= value "" delim
-		return SubStr(t, 1, -StrLen(delim))
+		return SubStr(t,1, -StrLen(delim))
 	}
 }
