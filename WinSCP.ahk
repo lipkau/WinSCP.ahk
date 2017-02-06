@@ -27,7 +27,15 @@ Description
 Scope
 	Global
 */
-global WinSCPEnum:= {FtpMode:{Passive:0,Active:1},FtpSecure:{None:0,Implicit:1,ExplicitTls:2,ExplicitSsl:3},FtpProtocol:{Sftp:0,Scp:1,Ftp:2},TransferMode:{Binary:0,Ascii:1,Automatic:2},SynchronizationMode:{Local:0,Remote:1,Both:2},SynchronizationCriteria:{None:0,Time:1,Size:2,Either:3}}
+class WinSCPEnum
+{
+	static FtpMode                 := {Passive:0, Active:1}
+	static FtpSecure               := {None:0, Implicit:1, ExplicitTls:2, ExplicitSsl:3}
+	static FtpProtocol             := {Sftp:0, Scp:1, Ftp:2}
+	static TransferMode            := {Binary:0, Ascii:1, Automatic:2}
+	static SynchronizationMode     := {Local:0, Remote:1, Both:2}
+	static SynchronizationCriteria := {None:0, Time:1, Size:2, Either:3}
+}
 
 ;~ -----------------------------------------------------
 ;~  Event Handlers
@@ -119,7 +127,7 @@ class WinSCP
 			return this.Session.SessionLogPath := value
 		}
 	}
-	
+
 	/*
 	Description
 		Create a Property for the HomePath. Class Session should be transperant in Class FTP.
@@ -147,7 +155,7 @@ class WinSCP
 			return this.Session.Opened
 		}
 	}
-	
+
 	;~ -----------------------------------------------------
 	;~  Methods
 	;~ -----------------------------------------------------
@@ -158,7 +166,7 @@ class WinSCP
 	__New()
 	{
 		global WinSCPEnum ; WinSCP Enums
-		
+
 		;~ Set defaults
 		this.Port                    := 21
 		this.Secure                  := WinSCPEnum.FtpSecure.None
@@ -170,7 +178,7 @@ class WinSCP
 		this.Fingerprint             := false
 		ComObjConnect(this.Session, "session_")
 	}
-	
+
 	/*
 	Description
 		Destructor
@@ -180,11 +188,11 @@ class WinSCP
 		;~ this.Dispose()
 		;~ this.CloseConnection()
 	;~ }
-	
+
 	/*
 	Descitipion
 		Open connection to server
-		
+
 	Input
 		srv        : [string] Server DNS or IP
 		uName      : [string] User Name
@@ -193,20 +201,20 @@ class WinSCP
 	OpenConnection(srv="",uName="",pWord="")
 	{
 		global WinSCPEnum ; WinSCP Enums
-		
+
 		this.SessionOptions.HostName := (srv)   ? srv   : this.Hostname
 		this.SessionOptions.UserName := (uName) ? uName : this.User
 		this.SessionOptions.Password := (pWord) ? pWord : this.Password
-		
+
 		;~ FTP Mode
 		this.SessionOptions.FtpMode := this.Mode
-		
+
 		;~ FTP Protocol
 		this.SessionOptions.Protocol := this.Protocol
-		
+
 		;~ FTP Security
 		this.SessionOptions.FtpSecure := this.Secure
-		
+
 		;~ Fingerprint
 		IsEncrypted := this.Secure
 		Encryptions := WinSCPEnum.FtpSecure.Implicit "," WinSCPEnum.FtpSecure.ExplicitTls "," WinSCPEnum.FtpSecure.ExplicitSsl
@@ -225,10 +233,10 @@ class WinSCP
 					this.SessionOptions.GiveUpSecurityAndAcceptAnyTlsHostCertificate := true
 			}
 		}
-		
+
 		this.Session.Open(this.SessionOptions)
 	}
-	
+
 	/*
 	Descitipion
 		Closes session.
@@ -239,7 +247,7 @@ class WinSCP
 		try
 			this.Session.Close()
 	}
-	
+
 	/*
 	Descitipion
 		If session was opened, closes it, terminates underlying WinSCP process, deletes XML log file and disposes object.
@@ -249,15 +257,15 @@ class WinSCP
 		try
 			this.Session.Dispose()
 	}
-	
+
 	/*
 	Description:
 		Lists the contents of specified remote directory.
 		http://winscp.net/eng/docs/library_session_listdirectory
-	
+
 	Input:
 		remotePath : [string] Full path to remote directory to be read.
-	
+
 	Output:
 		[RemoteDirectoryInfo]
 	*/
@@ -265,47 +273,47 @@ class WinSCP
 	{
 		return this.Session.ListDirectory(remotePath)
 	}
-	
+
 	/*
 	Description:
 		Creates remote directory.
 		http://winscp.net/eng/docs/library_session_createdirectory
-	
+
 	Input:
 		remotePath : [string] Full path to remote directory to create.
-	
+
 	Output:
 		[void]
-	*/  
+	*/
 	CreateDirectory(remotePath)
 	{
 		return this.Session.CreateDirectory(remotePath)
 	}
-	
+
 	/*
 	Description:
 		Checks for existence of remote file.
 		http://winscp.net/eng/docs/library_session_fileexists
-	
+
 	Input:
 		remotePath : [string] Full path to remote file. Note that you cannot use wildcards here.
-	
+
 	Output:
 		[bool] true if file exists, false otherwise.
-	*/  
+	*/
 	FileExists(remotePath)
 	{
 		return this.Session.FileExists(remotePath)
 	}
-	
+
 	/*
 	Description:
 		Retrieves information about remote file.
 		http://winscp.net/eng/docs/library_session_getfileinfo
-	
+
 	Input:
 		remotePath : [string] Full path to remote file.
-	
+
 	Output:
 		[RemoteFileInfo]
 		http://winscp.net/eng/docs/library_remotefileinfo
@@ -314,15 +322,15 @@ class WinSCP
 	{
 		return this.Session.GetFileInfo(remotePath)
 	}
-	
+
 	/*
 	Description:
 		Downloads one or more files from remote directory to local directory.
 		http://winscp.net/eng/docs/library_session_getfiles
-		
+
 		This Method supports Wildcards
 		http://winscp.net/eng/docs/library_wildcard
-	
+
 	Input:
 		remotePath : [string]          Full path to remote directory followed by slash and wildcard to
 		                               select files or subdirectories to download. When wildcard is
@@ -335,7 +343,7 @@ class WinSCP
 		                               Defaults to false.
 		options    : [TransferOptions] Transfer options. Defaults to null, what is equivalent to new
 		                               TransferOptions().
-	
+
 	Output:
 		[TransferOperationResult]
 		See also Capturing results of operations.
@@ -346,18 +354,18 @@ class WinSCP
 		;remove
 		if remove not in 0,1
 			throw "Invalid value for remove"
-		
+
 		return this.Session.GetFiles(remotePath, localPath, remove, this.TransferOptions)
 	}
-	
+
 	/*
 	Description:
 		Uploads one or more files from local directory to remote directory.
 		http://winscp.net/eng/docs/library_session_putfiles
-		
+
 		This Method supports Wildcards
 		http://winscp.net/eng/docs/library_wildcard
-	
+
 	Input:
 		localPath  : [string]          Full path to local file or directory to upload. Filename in the
 		                               path can be replaced with Windows wildcard1) to select multiple
@@ -370,7 +378,7 @@ class WinSCP
 		                               Defaults to false.
 		options    : [TransferOptions] Transfer options. Defaults to null, what is equivalent to new
 		                               TransferOptions().
-	
+
 	Output:
 		[TransferOperationResult]
 		See also Capturing results of operations.
@@ -381,23 +389,23 @@ class WinSCP
 		;localPath
 		if (!FileExist(localPath))
 			throw "Could not find " localPath
-		
+
 		;remove
 		if remove not in 0,1
 			throw "Invalid value for remove"
-		
+
 		return this.Session.PutFiles(localPath, remotePath, remove, this.TransferOptions)
 	}
-	
+
 	/*
 	Description:
 		Moves remote file to another remote directory and/or renames remote file.
 		http://winscp.net/eng/docs/library_session_movefile
-	
+
 	Input:
 		sourcePath : [string] Full path to remote file to move/rename.
 		targetPath : [string] Full path to new location/name to move/rename the file to.
-	
+
 	Output:
 		[void]
 	*/
@@ -405,19 +413,19 @@ class WinSCP
 	{
 		return this.Session.MoveFile(sourcePath, targetPath)
 	}
-	
+
 	/*
 	Description:
 		Removes one or more remote files.
 		http://winscp.net/eng/docs/library_session_removefiles
-		
+
 		This Method supports Wildcards
 		http://winscp.net/eng/docs/library_wildcard
-	
+
 	Input:
 		remotePath : [string] Full path to remote directory followed by slash and
 		                      wildcard to select files or subdirectories to remove.
-	
+
 	Output:
 		[RemovalOperationResult]
 		See also Capturing results of operations.
@@ -426,12 +434,12 @@ class WinSCP
 	{
 		return this.Session.RemoveFiles(remotePath)
 	}
-	
+
 	/*
 	Description:
 		Synchronizes directories.
 		http://winscp.net/eng/docs/library_session_synchronizedirectories
-	
+
 	Input:
 		SynchronizationMode     : [enum]   Synchronization mode. Possible values are SynchronizationMode.Local,
 		                                   SynchronizationMode.Remote and SynchronizationMode.Both.
@@ -454,42 +462,42 @@ class WinSCP
 	SynchronizeDirectories(SynchronizationMode, localPath, remotePath, removeFiles, mirror=false, SynchronizationCriteria=1)
 	{
 		global WinSCPEnum ; WinSCP Enums
-		
+
 		;~ Checks
 		;Mode
 		if SynchronizationMode not in % this.StringJoin(WinSCPEnum.SynchronizationMode,",")
 			throw "Invalid SynchronizationMode"
-		
+
 		;localPath
 		if (!FileExist(localPath))
 			throw "Could not find " localPath
-		
+
 		;removeFiles
 		if removeFiles not in 0,1
 			throw "Invalid removeFiles"
 		if (removeFiles && (removeFiles==WinSCPEnum.SynchronizationMode.Both))
 			throw "Deletion of obsolete files cannot be used for SynchronizationMode.Both"
-		
+
 		;mirror
 		if mirror not in 0,1
 			throw "Invalid mirror"
 		if (mirror && (removeFiles==WinSCPEnum.SynchronizationMode.Both))
 			throw "Synchronization in mirror mode (synchronizes also older files) cannot be used for SynchronizationMode.Both"
-		
+
 		;SynchronizationCriteria
 		if SynchronizationCriteria not in % this.StringJoin(WinSCPEnum.SynchronizationCriteria,",")
 			throw "Invalid SynchronizationCriteria"
-		
+
 		;TransferOptions
 		if (options && (ComObjType(options,"Name")=="_TransferOptions"))
 			throw "Invalid TransferOptions"
-		
+
 		if (!this.TransferOptions.TransferMode)
 			this.SetTransferOptions(,,,,,WinSCPEnum.TransferMode.Binary)
-		
+
 		this.Session.SynchronizeDirectories(SynchronizationMode, localPath, remotePath, removeFiles, mirror, SynchronizationCriteria, this.TransferOptions)
 	}
-	
+
 	;~ -----------------------------------------------------
 	;~  Helper Methods
 	;~ -----------------------------------------------------
@@ -497,13 +505,13 @@ class WinSCP
 	Description
 		Set TransferOptions
 		http://winscp.net/eng/docs/library_transferoptions
-		
+
 	Input
 		FileMask          : [string]                FileMask
 		FilePermissions   : [FilePermissions]       Permissions to applied to a remote file (used for
 		                                            uploads only). Use default null to keep default permissions.
 		PreserveTimestamp : [bool]                  Preserve timestamp (set last write time of destination file
-													to that of source file). Defaults to true. 
+													to that of source file). Defaults to true.
                                                     When used with Session.SynchronizeDirectories, timestamp is
 												    always preserved, disregarding property value, unless criteria
 													parameter is SynchronizationCriteria.None or
@@ -519,28 +527,28 @@ class WinSCP
 	SetTransferOptions(FileMask="",FilePermissions="",PreserveTimestamp=true,ResumeSupport="",SpeedLimit="",TransferMode=0)
 	{
 		global WinSCPEnum ; WinSCP Enums
-		
+
 		;~ Check
 		;FilePermissions
 		if (FilePermissions && (ComObjType(permissions,"Name")=="_FilePermissions"))
 			throw "Invalid FilePermissions"
-		
+
 		;PreserveTimestamp
 		if PreserveTimestamp not in 0,1
 			throw "Invalid value for PreserveTimestamp"
-			
+
 		;permissions
 		if (ResumeSupport && (ComObjType(ResumeSupport,"Name")=="_TransferResumeSupport"))
 			throw "Invalid ResumeSupport"
-		
+
 		;SpeedLimit
 		if SpeedLimit is not Integer
 			throw "Invalid SpeedLimit"
-		
+
 		;TransferMode
 		if TransferMode not in % this.StringJoin(WinSCPEnum.TransferMode,",")
 			throw "Invalid TransferMode"
-		
+
 		this.TransferOptions.FileMask 			:= (FileMask) ? FileMask : ""
 		this.TransferOptions.FilePermissions 	:= (FilePermissions) ? FilePermissions: ""
 		this.TransferOptions.PreserveTimestamp 	:= (PreserveTimestamp) ? PreserveTimestamp : ""
@@ -548,12 +556,12 @@ class WinSCP
 		this.TransferOptions.SpeedLimit	 		:= (SpeedLimit) ? SpeedLimit : ""
 		this.TransferOptions.TransferMode  		:= (TransferMode) ? TransferMode : ""
 	}
-	
+
 	/*
 	Description
 		Converts special characters in file path to make it unambiguous file mask/wildcard.
 		http://winscp.net/eng/docs/library_session_escapefilemask
-		
+
 	Input
 		fileMask : [string] File path to convert.
 	*/
@@ -561,15 +569,15 @@ class WinSCP
 	{
 		return this.Session.EscapeFileMask(FileMask)
 	}
-	
+
 	/*
 	Description
 		Join Array to String
-		
+
 	Input
 		array : [array]  Array that will be joined into string
 		delim : [string] Character (set) that will be used between array elements in string
-		
+
 	Output
 		[string]
 	*/
