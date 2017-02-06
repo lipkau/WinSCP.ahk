@@ -183,11 +183,11 @@ class WinSCP
 	Description
 		Destructor
 	*/
-	;~ __Delete()
-	;~ {
-		;~ this.Dispose()
-		;~ this.CloseConnection()
-	;~ }
+	__Delete()
+	{
+		this.Dispose()
+		this.CloseConnection()
+	}
 
 	/*
 	Descitipion
