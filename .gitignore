@@ -1,5 +1,6 @@
 Thumbs.db
-desktop.ini
 *.log
 *.cache
 *.bak
+*.ini
+*.tlb
