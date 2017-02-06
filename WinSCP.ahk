@@ -29,11 +29,11 @@ Scope
 */
 class WinSCPEnum
 {
-	static FtpMode := {Passive:0, Active:1}
-	static FtpSecure := {None:0, Implicit:1, ExplicitTls:2, ExplicitSsl:3}
-	static FtpProtocol := {Sftp:0, Scp:1, Ftp:2}
-	static TransferMode := {Binary:0, Ascii:1, Automatic:2}
-	static SynchronizationMode := {Local:0, Remote:1, Both:2}
+	static FtpMode                 := {Passive:0, Active:1}
+	static FtpSecure               := {None:0, Implicit:1, ExplicitTls:2, ExplicitSsl:3}
+	static FtpProtocol             := {Sftp:0, Scp:1, Ftp:2}
+	static TransferMode            := {Binary:0, Ascii:1, Automatic:2}
+	static SynchronizationMode     := {Local:0, Remote:1, Both:2}
 	static SynchronizationCriteria := {None:0, Time:1, Size:2, Either:3}
 }
 
