@@ -222,12 +222,12 @@ class WinSCP
 		{
 			if (StrLen(this.Fingerprint) > 1)
 			{
-				if (this.Protocol==WinSCPEnum.FtpProtocol.Scp)
+				if (this.Protocol==WinSCPEnum.FtpProtocol.Scp || this.Protocol==WinSCPEnum.FtpProtocol.Sftp)
 					this.SessionOptions.SshHostKeyFingerprint := this.Fingerprint
 				else
 					this.SessionOptions.TlsHostCertificateFingerprint := this.Fingerprint
 			} else {
-				if (this.Protocol==WinSCPEnum.FtpProtocol.Scp)
+				if (this.Protocol==WinSCPEnum.FtpProtocol.Scp || this.Protocol==WinSCPEnum.FtpProtocol.Sftp)
 					this.SessionOptions.GiveUpSecurityAndAcceptAnySshHostKey := true
 				else
 					this.SessionOptions.GiveUpSecurityAndAcceptAnyTlsHostCertificate := true

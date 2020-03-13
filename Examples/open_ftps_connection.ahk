@@ -1,5 +1,5 @@
 ;~ ---------------------------------------------------
-;~ Open Connection using SSL FTP
+;~ Open Connection using FTP with explicit SSL
 ;~ ---------------------------------------------------
 
 ; Include lib
